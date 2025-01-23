@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/QuickFin"
+
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.RSSReader"
+        tools:targetApi="31">
+
+        <!-- MainActivity is the app's entry point -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+
+            android:theme="@style/Theme.RSSReader">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Register all additional calculator activities -->
+        <activity android:name=".TipCalculatorActivity" />
+        <activity android:name=".MortgageCalculatorActivity" />
+        <activity android:name=".CurrencyConverterActivity" />
+        <activity android:name=".DiscountCalculatorActivity" />
+        <activity android:name=".InvestmentReturnCalculatorActivity" />
+        <activity android:name=".SavingsAdvisorActivity" />
+
+
+    </application>
+</manifest>
