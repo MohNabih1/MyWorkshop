@@ -1,0 +1,100 @@
+var i: int;
+var j = i*3;
+var x: float;
+var y: float = x+1;
+var s: string = "a";
+var b: float;
+var b: boolean;
+var r: {A:int,B:float};
+var re: {A:int,A:float};
+var t: (int,(float,string,{A:int,B:(float,int)}),());
+var a: array[(int,float)] = array(100,(2,x*3));
+type tp = (int,{A:int,B:float});
+var z: tp = (3,{A=i+1,B=3.4});
+var w: tpe;
+
+=i+1
+=xx+1
+=x*3+i
+=i*2.3+4
+=x+s
+=s*3
+=b || not b
+=r.B
+=r.C
+=t#0
+=t#1#0
+=t#2
+=t#3
+=t#1#2
+=t#1#2.B
+=t#1#2.B#1
+=t#1#2.X
+=a.length
+=a[i+1]
+=a[i+1]#1+1
+=a[x*3]
+=(a[i]#1+1,t#1#2)
+={X=a[i]#1+1,Y=t#1#2}
+={X=2,X=y}
+={X=3.4,Y=i+1}.X
+={X=3.4,Y=i+1}.A
+={X=3.4} == {X=x}
+={X=3.4,Y=i} == {X=x,Y=3}
+={X=3.4} == {X=i}
+={X=3.4,Y=i} == {X=x}
+={X=3.4} == {X=x,Y=3}
+=()
+=(2.3)
+=(1,2.3,"s")
+=[]
+=[x+1]
+=[x,y]
+=[x,i]
+
+x = x+1;
+r.A = t#0;
+a[i+1]#0 = i*3;
+t#1#2.A = t#0;
+z#1 = {A=1,B=r.B};
+a[i+1] = (i*3,x+y);
+a#0 = 3;
+z#2.A = 4.5;
+{};
+{ x = x+1; }
+{ r.A = t#0; x = 3.4; }
+{ var x: int = 0; x = i; }
+{ var i = i+1.0; { var i = s; print(i); }; i = 3.5; }
+if (x < 3.4) y = x+1;
+if (x+1) y = x+1;
+if (b) y = x+1;
+if (x < 3.4) y = x+1; else y = 3.5;
+while (x < 3.4) { x = x+1; }
+loop { x = x+1; if (x<4) exit; }
+for (i = 2 to 10) x=x+1;
+for (i = 0 to 10 by 2) x=x+1;
+for (i = 10 to 0 by -1) { var z = x+1; x=x+1; if (z>3) exit; }
+print();
+print("a",s,i,x+1);
+read(x);
+read(a[i+1]#0);
+
+def f ( x: int, y: float ): int { return x+1; }
+
+=f(i+1,x*y)
+=f(2)
+=f(2,3,4)
+=f(3.5,4.6)
+=f(f(2,x),f(i,y)*x)
+
+def g ( x: int, y: float ): (int,float) { return (x,y*z#1.A); }
+=g(i,x)#1
+
+var f1: (int,float)->int;
+var f2: ((int)->int)->float;
+
+=f1(2,3.4)
+=f1(5.6,x+1)
+=function(x:int,y:float):int { return x+1; }
+=f2( function(x:int): int { return x+1; } )
+q

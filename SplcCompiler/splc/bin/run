@@ -1,0 +1,8 @@
+#/bin/bash
+
+file=$1
+bn=${file%.*}
+
+llc $file
+gcc -O2 -fno-pie -no-pie $bn.s -lgc
+./a.out

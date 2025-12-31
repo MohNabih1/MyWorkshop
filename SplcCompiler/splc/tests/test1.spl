@@ -1,0 +1,19 @@
+var x: int = 6;
+var y = 4;
+var z = 3.5+y*2;
+
+print(x*z);
+
+def f (a : int) {
+  var i: int = 20;
+  print(a);
+  print(i);
+  print(x);
+  x = x+1;
+  for ( k = 1 to a )
+    if (k <= 5.2)
+      print(k);
+};
+
+f(x+3);
+print(x+y*2);

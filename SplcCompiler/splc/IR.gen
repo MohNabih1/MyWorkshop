@@ -1,0 +1,72 @@
+/*
+ * Copyright © 2024 Leonidas Fegaras, University of Texas at Arlington
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/** Intermediate Representations for Expressions */
+class IRexp ();
+class BooleanValue: IRexp ( bool value );
+class IntValue: IRexp ( int value );
+class FloatValue: IRexp ( float value );
+class StringValue: IRexp ( string value );
+class NullValue: IRexp ();
+class Address: IRexp ( string value );
+class VoidValue: IRexp ();
+class FramePointer: IRexp ();
+/** a closure is a pair of a function with a static link */
+class Closure: IRexp ( string function_name, IRexp static_link );
+/** the address of an element of a composite type (tuple, vector, etc) */
+class Indexed: IRexp ( IRexp address, IRexp offset );
+/** the size of type in bytes */
+class TypeSize: IRexp ( Type object_type );
+/** allocate size number of bytes in the heap and return the object address */
+class Allocate: IRexp ( Type otype, IRexp size );
+/** get the memory content at a given address */
+class Mem: IRexp ( IRexp address );
+/** binary operations: GT, LT, EQ, GE, LE, NE, PLUS, MINUS, TIMES, SLASH, DIV, MOD, AND, OR */
+class Binop: IRexp ( string op, IRexp left, IRexp right );
+/** unary operations: MINUS, NOT */
+class Unop: IRexp ( string op, IRexp operand );
+/** call a function by providing a static link and by passing arguments and return back the result */
+class Call: IRexp ( IRexp address, IRexp static_link, vector<IRexp> arguments );
+/** evaluate the statement and return the value */
+class ESeq: IRexp ( IRstmt stmt, IRexp value );
+/** used in polymorphic functions */
+class Coerce: IRexp ( IRexp value, Type from_type, Type to_type );
+
+/** Intermediate Representations for Statements */
+class IRstmt ();
+/** store the source to the destination (a Mem or a Reg IRexp) */
+class Move: IRstmt ( IRexp destination, IRexp source );
+/** define a label to be the current address */
+class Label: IRstmt ( string name );
+/** jump to a label */
+class Jump: IRstmt ( string label );
+/** jump to a label if condition is true */
+class CJump: IRstmt ( IRexp condition, string label );
+/** evaluate a sequence of statements */
+class Seq: IRstmt ( vector<IRstmt> stmts );
+/** call a procedure by providing a static link and by passing arguments */
+class CallP: IRstmt ( IRexp address, IRexp static_link, vector<IRexp> arguments );
+/** a system call can be: READ_INT, READ_FLOAT, WRITE_INT, WRITE_FLOAT, WRITE_BOOL, WRITE_STRING */
+class SystemCall: IRstmt ( string name, IRexp arg );
+/** return from a function/procedure */
+class Return: IRstmt ( IRexp value );
+class Assert: IRstmt ( IRexp condition );
+
+class IRdecl ();
+class IRTypeDecl: IRdecl ( string label, Type hasType );
+class IRFuncDecl: IRdecl ( string label, vector<Type> formal_params, Type result_type,
+                           vector<Type> frame, int level, vector<IRstmt> body );
+

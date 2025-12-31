@@ -1,0 +1,5 @@
+def f ( a: int, b: int ): int {
+  return a + 2*b;
+}
+
+print(f(10, 20));

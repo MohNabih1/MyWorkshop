@@ -1,0 +1,7 @@
+var x = { a = 23, b = "xyz", c = { d = 3.5, c = true }, xyz = (1,"a",(2,3.4),()) };
+
+x.a = 89;
+x.b = "abc";
+x.c.d = 5.78;
+x.xyz#2 = (4,8.9);
+print(x.a,"  ",x.c.d," ",x.b," ",x.xyz#2#1);

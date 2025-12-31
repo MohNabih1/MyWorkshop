@@ -1,0 +1,45 @@
+=25.3e-4
+=2*x+1.5
+=3+x*y/4-3*z%(x+1.4)
+="xyz abc"
+="a b""c d"
+=true
+=false
+=-3.4-x*z
+=z--x
+=x&&y||z&&not w
+=x+2*y<=3*z+1
+=x+1 < 2.3 && x >= z+3.4
+=a[i+1]
+=b[i][j*2+1]
+=a.x
+=a.4
+=a.x.y
+=a.x[i].z[j]
+=a[i+1].x[j][i+1]
+=a#2
+=a#w
+=a#3#4
+=a.x#2[i]#5.z
+=g()
+=f(x+2*g(4,5))
+=f(2+x,3,g(5+y))
+=f(2+x,3,)
+=f(2+x,,3)
+=()
+=(2+4*x)
+=((2,x,()),"a",())
+=[]
+=[x+1]
+=[x+1,2,3.4,[1,2]]
+={}
+={x=z+2}
+={x=2,z=a+1}
+={x=2,a+1}
+=array(100,x+3.5)
+=array(100)
+=function (): int { x = x+1; }
+=function ( x: int ): int { x = x+1; }
+=function ( x: int, y: boolean ): int { x = x+1; }
+=function: int { x = x+1; }
+q

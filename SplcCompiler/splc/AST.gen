@@ -1,0 +1,88 @@
+/*
+ * Copyright © 2024 Leonidas Fegaras, University of Texas at Arlington
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/** Abstract syntax tree for the main program */
+class Program ( BlockSt body );
+
+/** Abstract syntax trees for types */
+class Type ();
+class IntType: Type ();
+class ByteType: Type ();
+class FloatType: Type ();
+class StringType: Type ();
+class BooleanType: Type ();
+class NamedType: Type ( string name );
+class ArrayType: Type ( Type element_type );
+class RecordType: Type ( vector<tuple<string,Type>> components );
+class TupleType: Type ( vector<Type> components );
+class FunctionType: Type ( vector<Type> formal_params, Type result_type );
+class PointerType: Type ( Type address );
+class AnyType: Type ();
+class NoType: Type ();
+
+/** Abstract syntax trees for expressions */
+class Expr ( Type tpe );
+class Var: Expr ( string name );
+class IntConst: Expr ( int value );
+class FloatConst: Expr ( float value );
+class StringConst: Expr ( string value );
+class BooleanConst: Expr ( bool value );
+class NullExp: Expr ();
+class BinOpExp: Expr ( string op, Expr left, Expr right );
+class UnOpExp: Expr ( string op, Expr operand );
+class ArrayDeref: Expr ( Expr array, Expr index );
+class RecordDeref: Expr ( Expr record, string attribute );
+class TupleDeref: Expr ( Expr tuple, int index );
+class CallExp: Expr ( string name, vector<Expr> arguments );
+class RecordExp: Expr ( vector<tuple<string,Expr>> components );
+class ArrayExp: Expr ( vector<Expr> elements );
+class ArrayGen: Expr ( Expr length, Expr value );
+class TupleExp: Expr ( vector<Expr> elements );
+class FunctionExp: Expr ( vector<tuple<string,Type>> formal_params,
+                          Type result_type, BlockSt body );
+
+/** Abstract syntax trees for statements */
+class Stmt ();
+class AssignSt: Stmt ( Expr destination, Expr source );
+class CallSt: Stmt ( string name, vector<Expr> arguments );
+class ReadSt: Stmt ( vector<Expr> arguments );
+class PrintSt: Stmt ( vector<Expr> arguments );
+class IfSt: Stmt ( Expr condition, Stmt then_stmt, Stmt else_stmt );
+class WhileSt: Stmt ( Expr condition, Stmt body );
+class LoopSt: Stmt ( Stmt body );
+class ForSt: Stmt ( string variable, Expr initial, Expr last, Expr increment, Stmt body );
+class ExitSt: Stmt ();
+class ReturnValueSt: Stmt ( Expr value );
+class ReturnSt: Stmt ();
+class BlockSt: Stmt ( vector<Stmt> stmts );
+/** a type definition */
+class TypeDef: Stmt ( string name, Type hasType );
+/** a variable definition */
+class VarDef: Stmt ( string name, Type hasType, Expr value );
+/** a function definition */
+class FuncDef: Stmt ( string name, vector<tuple<string,Type>> formal_params,
+                      Type result_type, BlockSt body );
+
+/** Declarations for variables, types, and functions */
+class Declaration ();
+/** type declaration: has a type */
+class TypeDeclaration: Declaration ( Type hastype );
+/** variable declaration: the type and the level/offset of a variable in a frame */
+class VarDeclaration: Declaration ( Type vartype, int level, int offset );
+/** function declaration: output type, formal parameters, code address,
+ *  parent's code address, nesting level, and next available offset in a frame */
+class FuncDeclaration: Declaration ( vector<tuple<string,Type>> formal_params, Type result_type,
+                                     string label, int level, int available_offset );
